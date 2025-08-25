@@ -107,7 +107,7 @@ resource "aws_instance" "demo_vm" {
       type        = var.remote["remote_type"]
       host        = aws_instance.demo_vm.public_ip
       user        = var.remote["remote_user"]
-      private_key = file(var.remote["remote_private_key"])
+      private_key = file(var.private_key)
     }
     on_failure=continue
   }
