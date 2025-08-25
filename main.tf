@@ -74,7 +74,7 @@ resource "aws_route_table_association" "demo_route_association" {
 }
 resource "aws_key_pair" "demo" {
   key_name   = "demo"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDa5W870yIvQ7tjDiMbc3t+Rvb9+E9OVZuXRs8aQF/Tn79EQskShsvNx5Ssd9/lrrhFL1haxyYf1tlujSIz0wg4LPUgI0GZaui+ceZdYPu1SHQ7aaXbY5aqdmrOzu9IYSoxzWd914JpUu4FPr7acZw2PujVbtlYG/0Vkbk1quOsPb9bo/+21i20SHFzoHeeJdlz2nME1lWs4KcI4KPlsu66XvurmXPaxIBYy20Ox/vRk1DzpMTPlg5YYTkYa95QWnRaRAw+zXzGiNkBUTiQdBjv0+T9lQmdAiGlI7z0nnbDDu44n5A+rMOhLrl+I8qOphmQMs5hQZh8rD5axn+nHiUo+frYzSfQw+PcjMKlsOis4FE/ULllEJl36L+Fsc7J3LnyBFCRCux8BUFGua8U+cQnWK7GBUVB0M6PJbIDnr1VEqp+hefO2o7VJKVegtlp+KFMWsvKKH250Fr82jkBK6M4VAmyOIIZkGqWHwYB3Yet5Ch6lw2it95uH27UVs4kVsU= ajaygaddam@AJAY"
+  public_key = file("./demo.pub")
   tags = {
     Name = var.tags["demo_key_name"]
   }
@@ -92,7 +92,16 @@ resource "aws_instance" "demo_vm" {
     Name = var.tags["instance_vm"]
   }
   provisioner "remote-exec" {
-    script = "install.sh"
+    inline = [
+      "sudo apt update",
+      "sudo apt-get install openjdk-17-jdk -y",
+      "sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key",
+      "echo \"deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/\" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null",
+      "sudo apt-get update",
+      "sudo apt-get install jenkins -y",
+      "sudo systemctl enable jenkins",
+      "sudo systemctl start jenkins"
+    ]
     connection {
       type        = var.remote["remote_type"]
       host        = aws_instance.demo_vm.public_ip
