@@ -21,7 +21,7 @@ pipeline{
                 withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu-demo', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
           bat """
             set TF_VAR_ssh_user=%SSH_USER%
-            set TF_VAR_private_key_path=%SSH_KEY%
+            set TF_VAR_private_key=%SSH_KEY%
             terraform ${params.CHOICE}
           """
             }
