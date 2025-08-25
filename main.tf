@@ -74,7 +74,7 @@ resource "aws_route_table_association" "demo_route_association" {
 }
 resource "aws_key_pair" "demo" {
   key_name   = "demo"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzzqTA4utPXgRozVbL5xeutVz43Nt44CBz/7V1lLDtD6fsYYpOyK70SpyR62UcEeVYH6XnEIQ/G2mx1slD1Vv3l+LUmQoua/25qAQzD7YKtTVWCgUMOr+t+P/aTDKZS/oSE5APaBw47wH8FvQgjc0mEob+KznTaXcTZJFjHTy9ijuI0BFGwpc5ZBZGez3yfm+nARx+1g25Fvscu1+t4stHLCQQfdgZWOXMQ4bjAOHC2is5pMjTSsYBHkOTQTWI/8m5PsjDw3fArAUcZRmZOZIDZ7JfdrTYAKp2wHjpVspLyntQM8ypZejvzfKrFUFiKR7Y+TRUEfhU0LnI3cKOXIhiJkaTAUhn/md235No6wJFq0nX1NhTi/bj3Vkee2MYHiBqcOprno2X4rDgD+hpD0Ul+JxhqO5eEpoKBsajAa+RwwqKpznjCOhYLVxmD3APS+3K3DqBpZHO2uoorutEXCjZdSY8kiUcdKPhwyvF/UTKZyHBRqFolUlSzW8vF52GQfc= ajaygaddam@AJAY"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDa5W870yIvQ7tjDiMbc3t+Rvb9+E9OVZuXRs8aQF/Tn79EQskShsvNx5Ssd9/lrrhFL1haxyYf1tlujSIz0wg4LPUgI0GZaui+ceZdYPu1SHQ7aaXbY5aqdmrOzu9IYSoxzWd914JpUu4FPr7acZw2PujVbtlYG/0Vkbk1quOsPb9bo/+21i20SHFzoHeeJdlz2nME1lWs4KcI4KPlsu66XvurmXPaxIBYy20Ox/vRk1DzpMTPlg5YYTkYa95QWnRaRAw+zXzGiNkBUTiQdBjv0+T9lQmdAiGlI7z0nnbDDu44n5A+rMOhLrl+I8qOphmQMs5hQZh8rD5axn+nHiUo+frYzSfQw+PcjMKlsOis4FE/ULllEJl36L+Fsc7J3LnyBFCRCux8BUFGua8U+cQnWK7GBUVB0M6PJbIDnr1VEqp+hefO2o7VJKVegtlp+KFMWsvKKH250Fr82jkBK6M4VAmyOIIZkGqWHwYB3Yet5Ch6lw2it95uH27UVs4kVsU= ajaygaddam@AJAY"
   tags = {
     Name = var.tags["demo_key_name"]
   }
