@@ -97,7 +97,7 @@ variable "remote" {
   type = map(any)
   default = {
     "remote_type"        = "ssh"
-    "remote_user"        = "ubuntu"
-    "remote_private_key" = "./demo"
+    #"remote_user"        = "ubuntu"
+   # "remote_private_key" = "./demo"
   }
 }

@@ -105,8 +105,8 @@ resource "aws_instance" "demo_vm" {
     connection {
       type        = var.remote["remote_type"]
       host        = aws_instance.demo_vm.public_ip
-      user        = var.remote["remote_user"]
-      private_key = file(var.remote["remote_private_key"])
+      #user        = var.remote["remote_user"]
+      #private_key = file(var.remote["remote_private_key"])
     }
   }
 
