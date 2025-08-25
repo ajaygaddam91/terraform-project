@@ -16,7 +16,7 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/ajaygaddam91/terraform-project.git'
             }
         }        
-        stage("terraform workflow"){
+        stage("terraform ${params.CHOICE}"){
             steps{
                 withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu-demo', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
           bat """
