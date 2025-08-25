@@ -74,7 +74,7 @@ resource "aws_route_table_association" "demo_route_association" {
 }
 resource "aws_key_pair" "demo" {
   key_name   = "demo"
-  public_key = file("./demo.pub")
+  public_key = file("C:\\ALL\\Projects\\demo.pub")
   tags = {
     Name = var.tags["demo_key_name"]
   }
