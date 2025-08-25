@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    parameters{
+        choice(name:'CHOICE',choices:['init','validate','fmt','plan','apply -auto-approve','destroy -auto-approve'],description: 'Select terraform workflow')
+    }
     tools{
         terraform 'terraform'
     }
@@ -12,24 +15,14 @@ pipeline{
             steps{
                 git branch: 'main', url: 'https://github.com/ajaygaddam91/terraform-project.git'
             }
-        }
-        stage("Terraform initialization"){
-            steps{
-                bat 'terraform init'
-            }
-        }
-        stage("Terraform plan"){
-            steps{
-                bat 'terraform plan'
-            }
-        }
-        stage("terraform apply"){
+        }        
+        stage("terraform workflow"){
             steps{
                 withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu-demo', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
           bat '''
             set TF_VAR_ssh_user=%SSH_USER%
             set TF_VAR_private_key_path=%SSH_KEY%
-            terraform apply -auto-approve
+            terraform ${params.CHOICE}
           '''
             }
         }        
