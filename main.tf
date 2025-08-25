@@ -80,7 +80,7 @@ resource "aws_key_pair" "demo" {
   }
 }
 resource "aws_instance" "demo_vm" {
-  key_name               = var.tags["demo_key_name"]
+  key_name               = aws_key_pair.demo.key_name #var.tags["demo_key_name"]
   ami                    = var.ami
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.demo_subnet.id
