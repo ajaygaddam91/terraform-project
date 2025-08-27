@@ -119,5 +119,5 @@ variable "private_key" {
 }
 variable "instance_vm" {
   type    = list(string)
-  default = ["Jenkins-server", "Maven-server", "Sonar-server", "Nexus-server"]
+  default = ["Jenkins-server", "Maven-server"]
 }
