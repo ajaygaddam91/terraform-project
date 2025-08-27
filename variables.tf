@@ -49,6 +49,20 @@ variable "security_ingress" {
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = ["::/0"]
+    },
+    {
+      from_port        = 8081
+      to_port          = 8081
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    },
+    {
+      from_port        = 9000
+      to_port          = 9000
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
     }
 
   ]
@@ -83,7 +97,6 @@ variable "tags" {
     "security_group"   = "demo_security_group"
     "gateway_name"     = "demo_gw"
     "route_table_name" = "demo_route_table"
-    "instance_vm"      = "demo_vm"
     "demo_key_name"    = "demo"
   }
 
@@ -96,11 +109,15 @@ variable "volume_size" {
 variable "remote" {
   type = map(any)
   default = {
-    "remote_type"        = "ssh"
-    "remote_user"        = "ubuntu"    
+    "remote_type" = "ssh"
+    "remote_user" = "ubuntu"
   }
 }
 
-variable "private_key"{
-  type=string
+variable "private_key" {
+  type = string
+}
+variable "instance_vm" {
+  type    = list(string)
+  default = ["Jenkins-server", "Maven-server", "Sonar-server", "Nexus-server"]
 }

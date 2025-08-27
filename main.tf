@@ -79,19 +79,37 @@ resource "aws_key_pair" "demo" {
     Name = var.tags["demo_key_name"]
   }
 }
+
+
 resource "aws_instance" "demo_vm" {
   key_name               = aws_key_pair.demo.key_name #var.tags["demo_key_name"]
   ami                    = var.ami
   instance_type          = var.instance_type
+  count                  = length(var.instance_vm)
   subnet_id              = aws_subnet.demo_subnet.id
   vpc_security_group_ids = [aws_security_group.demo_security.id]
   root_block_device {
     volume_size = var.volume_size
   }
   tags = {
-    Name = var.tags["instance_vm"]
+    Name = var.instance_vm[count.index]
   }
-  provisioner "remote-exec" {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+resource "null_resource" "install_jenkins"{
+provisioner "remote-exec" {
     inline = [
       "sudo apt update",
       "sudo apt-get install openjdk-17-jdk -y",
@@ -111,8 +129,6 @@ resource "aws_instance" "demo_vm" {
     }
     on_failure=continue
   }
-
-}
-
+}*/
 
 
